@@ -1,5 +1,5 @@
 {
-  "name": "Trashhold APP",
+  "name": "th-app",
   "private": true,
   "description": "Webapp and interface for Trashhold.",
   "version": "0.1.0",
@@ -27,7 +27,7 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
-    "develop": "gatsby develop",
+    "dev": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
@@ -35,9 +35,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/vacuumdreams/th-app"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/vacuumdreams/th-app/issues"
   }
 }
