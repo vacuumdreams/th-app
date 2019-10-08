@@ -11,7 +11,7 @@ const IndexPage = () => (
     <SEO title="Home" />
     <section className="hero is-dark is-fullheight">
       <div style={{ maxWidth: '700px', width: '70%' }}>
-        <h1 className="title is-size-1-tablet is-size-2-mobile">Life in plastic, it's not fantastic.</h1>
+        <h1 className="title has-text-weight-bold is-size-1-tablet is-size-2-mobile">Life in plastic, it's not fantastic.</h1>
       </div>
     </section>
   </Layout>
