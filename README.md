@@ -5,6 +5,8 @@
 
 #### Requirements
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/vacuumdreams/th-app.svg)](https://greenkeeper.io/)
+
 In order to get started, make sure you have the following installed:
 
   - `node@^12.2.0`
