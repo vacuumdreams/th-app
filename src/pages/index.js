@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-// import { Link } from 'gatsby'
 
 import Layout from '../components/layout/page'
-// import Image from '../components/image'
 import SEO from '../components/layout/seo'
 
 import Map from '../modules/map'
@@ -11,7 +9,7 @@ import '../theme/index.scss'
 
 class IndexPage extends Component {
   componentDidMount() {
-    window.analytics && window.analitics.page('Home');
+    window.analytics && window.analitics.page('Home')
   }
 
   render () {
