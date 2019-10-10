@@ -46,12 +46,12 @@ module.exports = {
           // your segment write key for your production environment
           // when process.env.NODE_ENV === 'production'
           // required; non-empty string
-          prodKey: `SEGMENT_WRITE_KEY`,
+          prodKey: process.env.SEGMENT_WRITE_KEY,
 
           // boolean (defaults to false) on whether you want
           // to include analytics.page() automatically
           // if false, see below on how to track pageviews manually
-          trackPage: true
+          trackPage: false
       }
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
