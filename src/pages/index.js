@@ -9,7 +9,7 @@ import '../theme/index.scss'
 
 class IndexPage extends Component {
   componentDidMount() {
-    window.analytics && window.analitics.page('Home')
+    window.analytics && typeof window.analitics.page === 'function' && window.analitics.page('Home')
   }
 
   render () {
