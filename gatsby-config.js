@@ -1,7 +1,11 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`
+})
+
 module.exports = {
   siteMetadata: {
     title: 'Trashhold',
-    description: 'Plastic is not fantastic',
+    description: 'Life in plastic, it\'s not fantastic',
     author: '@trashhold',
   },
   plugins: [
@@ -28,16 +32,30 @@ module.exports = {
         icon: 'src/images/gatsby-icon.png',
       },
     },
+    {
+      resolve: 'gatsby-source-contentful',
+      options: {
+        spaceId: process.env.CONTENTFUL_SPACE_ID,
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+        host: process.env.CONTENTFUL_HOST,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-segment-js',
+      options: {
+          // your segment write key for your production environment
+          // when process.env.NODE_ENV === 'production'
+          // required; non-empty string
+          prodKey: `SEGMENT_WRITE_KEY`,
+
+          // boolean (defaults to false) on whether you want
+          // to include analytics.page() automatically
+          // if false, see below on how to track pageviews manually
+          trackPage: true
+      }
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // 'gatsby-plugin-offline',
-    {
-      resolve: 'gatsby-source-sanity',
-      options: {
-        projectId: 'ocnnw83z',
-        dataset: 'production',
-        token: process.env.SANITY_PRIVATE_TOKEN,
-      },
-    }
   ],
 }

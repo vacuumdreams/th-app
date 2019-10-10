@@ -1,22 +1,33 @@
-import React from "react"
-// import { Link } from "gatsby"
+import React, { Component } from 'react'
+// import { Link } from 'gatsby'
 
-import Layout from "../components/layout"
-// import Image from "../components/image"
-import SEO from "../components/seo"
-import "../theme/index.scss"
+import Layout from '../components/layout/page'
+// import Image from '../components/image'
+import SEO from '../components/layout/seo'
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <section className="hero is-dark is-fullheight">
-      <div style={{ maxWidth: '700px', width: '70%' }}>
-        <h1 className="title has-text-weight-bold is-size-1-tablet is-size-2-mobile">
-          Life in plastic, it's <span className="is-family-secondary">NOT</span> fantastic.
-        </h1>
-      </div>
-    </section>
-  </Layout>
-)
+import Map from '../modules/map'
+
+import '../theme/index.scss'
+
+class IndexPage extends Component {
+  componentDidMount() {
+    window.analytics && window.analitics.page('Home');
+  }
+
+  render () {
+    return (
+      <Layout>
+        <SEO title="Home" />
+        <div style={{
+          position: 'absolute',
+          width: '100%',
+          height: '100vh',
+        }}>
+          <Map />
+        </div>
+      </Layout>
+    )
+  }
+}
 
 export default IndexPage
