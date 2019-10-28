@@ -25,7 +25,7 @@
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-helmet": "^5.2.1",
-    "react-instantsearch-dom": "^5.7.0",
+    "react-instantsearch-dom": "^6.0.0",
     "react-map-gl": "^5.0.12",
     "react-map-gl-geocoder": "^2.0.11",
     "recompose": "^0.30.0"
