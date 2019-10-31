@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 // import { GeoJsonLayer } from "deck.gl"
 // import Geocoder from "react-map-gl-geocoder"
 
-import "./index.scss"
+import Results from './component/results'
 
 const token = process.env.GATSBY_MAPBOX_ACCESS_TOKEN
 
@@ -31,6 +31,7 @@ class SearchableMap extends Component {
     MapGL: null,
     Geocoder: GeocoderPlaceholder,
     GeoJsonLayer: null,
+    GeolocateControl: null,
   }
 
   mapRef = React.createRef()
@@ -38,7 +39,10 @@ class SearchableMap extends Component {
 
   componentDidMount () {
     import('react-map-gl').then((res) => {
-      this.setState({ MapGL: res.default })
+      this.setState({
+        MapGL: res.default,
+        GeolocateControl: res.GeolocateControl,
+      })
     })
     import('react-map-gl-geocoder').then((res) => {
       this.setState({ Geocoder: res.default })
@@ -86,6 +90,7 @@ class SearchableMap extends Component {
         viewport,
         MapGL,
         Geocoder,
+        GeolocateControl,
       } = this.state
 
       return (
@@ -111,7 +116,9 @@ class SearchableMap extends Component {
                 Life in plastic, it's <span className="is-family-secondary">NOT</span> fantastic.
               </h1>
             </div>
-            <div className="map--search-results" />
+            <div className="map--search-results">
+              <Results />
+            </div>
             <div ref={this.containerRef} className="map--search-container">
               {
                 Geocoder && (
@@ -133,7 +140,21 @@ class SearchableMap extends Component {
                 )
               }
             </div>
+            {
+              GeolocateControl && (
+                <GeolocateControl
+                  style={{
+                    position: 'absolute',
+                    bottom: '1rem',
+                    right: '1rem',
+                  }}
+                  positionOptions={{enableHighAccuracy: true}}
+                  trackUserLocation={true}
+                />
+              )
+            }
           </section>
+          <div style={{ height: '150vh', background: '#000' }} />
         </div>
       )
     }

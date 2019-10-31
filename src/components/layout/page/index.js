@@ -1,10 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-// import { useStaticQuery, graphql } from 'gatsby'
+import CssBaseline from '@material-ui/core/CssBaseline'
 
-const Layout = ({ children }) => {
+import SEO from './seo'
+
+const Layout = ({ children, title }) => {
+  console.log('layout')
   return (
-    <div style={{ width: '100%', height: '100%', backgroundColor: '#000' }}>
+    <div>
+      <CssBaseline />
+      <SEO title={title} />
       {children}
     </div>
   )

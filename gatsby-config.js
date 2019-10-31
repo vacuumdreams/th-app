@@ -10,16 +10,15 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-react-helmet',
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
-        path: `${__dirname}/src/images`,
+        path: `${__dirname}/src/static/images`,
       },
     },
-    'gatsby-transformer-sharp',
-    'gatsby-plugin-sharp',
-    'gatsby-plugin-sass',
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
@@ -29,7 +28,7 @@ module.exports = {
         background_color: '#000',
         theme_color: '#000',
         display: 'minimal-ui',
-        icon: 'src/images/gatsby-icon.png',
+        icon: 'src/static/images/gatsby-icon.png',
       },
     },
     {
@@ -43,16 +42,17 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-segment-js',
       options: {
-          // your segment write key for your production environment
-          // when process.env.NODE_ENV === 'production'
-          // required; non-empty string
           prodKey: process.env.SEGMENT_WRITE_KEY,
-
-          // boolean (defaults to false) on whether you want
-          // to include analytics.page() automatically
-          // if false, see below on how to track pageviews manually
           trackPage: false
       }
+    },
+    {
+      resolve: 'gatsby-plugin-material-ui',
+      options: {
+        stylesProvider: {
+          injectFirst: true,
+        },
+      },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline

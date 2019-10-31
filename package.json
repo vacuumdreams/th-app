@@ -5,13 +5,17 @@
   "version": "0.1.0",
   "author": "Botond Fekete <fekbot@gmail.com>",
   "dependencies": {
+    "@material-ui/core": "^4.5.1",
+    "@material-ui/icons": "^4.5.1",
+    "@material-ui/styles": "^4.5.0",
     "algoliasearch": "^3.35.1",
-    "bulma": "^0.7.5",
     "deck.gl": "^7.3.2",
     "dotenv": "^8.1.0",
+    "firebase": "^7.2.0",
     "gatsby": "^2.15.31",
     "gatsby-image": "^2.2.24",
     "gatsby-plugin-manifest": "^2.2.20",
+    "gatsby-plugin-material-ui": "^2.1.6",
     "gatsby-plugin-offline": "^3.0.12",
     "gatsby-plugin-react-helmet": "^3.1.10",
     "gatsby-plugin-sass": "^2.1.17",
@@ -28,7 +32,10 @@
     "react-instantsearch-dom": "^5.7.0",
     "react-map-gl": "^5.0.12",
     "react-map-gl-geocoder": "^2.0.11",
-    "recompose": "^0.30.0"
+    "react-redux": "^7.1.1",
+    "react-redux-firebase": "^3.0.1",
+    "recompose": "^0.30.0",
+    "redux": "^4.0.4"
   },
   "devDependencies": {
     "prettier": "^1.18.2"

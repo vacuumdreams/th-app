@@ -1,7 +1,20 @@
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/browser-apis/
- */
+import React from 'react'
+import ThApp from './src'
 
-// You can delete this file if you're not using it
+export const wrapPageElement = (props) => {
+  console.log('page.', props)
+  return (
+    <div>
+      {props.element}
+    </div>
+  )
+}
+
+export const wrapRootElement = (props) => {
+  console.log('root.', props)
+  return (
+    <ThApp>
+      {props.element}
+    </ThApp>
+  )
+}

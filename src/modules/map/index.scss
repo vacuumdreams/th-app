@@ -1,157 +1,157 @@
-@import "../../theme/index.scss";
-
-.mapboxgl-ctrl-geocoder {
-  position: relative;
-  width: 100%;
-
-  &--input {
-    background: #000;
-    color: #fff;
-    outline: none;
-    padding: 1em;
-    font-size: 1.25rem;
-    border: none;
-    padding-left: 4rem;
-    box-shadow: 0 0 10px #000;
-    width: 100%;
-    height: 70px;
-
-    @media (min-width: $tablet) {
-      font-size: 2rem;
-      height: 100px;
-    }
-  }
-
-  &--icon {
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-    left: 1em;
-    fill: #fff;
-    width: 2em;
-    height: 2em;
-  }
-
-  &--pin-right {
-    display: none;
-  }
-
-  .suggestions {
-    padding: 1em 0;
-
-    &-wrapper {
-      background: #fff;
-      position: absolute;
-      z-index: -1;
-      width: 100%;
-      bottom: 100%;
-
-      @media (min-width: $tablet) {
-        bottom: initial;
-      }
-
-      .map--searched & {
-        bottom: 100%;
-      }
-    }
-
-    li {
-      &:hover {
-        background: #efefef;
-      }
-    }
-
-    a {
-      display: block;
-      cursor: pointer;
-      color: #000;
-      padding: 0.5em 1em;
-    }
-  }
-}
-
-.map {
-  &--item {
-    width: 100%;
-    height: 100vh;
-    position: absolute;
-  }
-
-  &--searched &--item {
-    @media (min-width: $tablet) {
-      width: calc(100% - 400px);
-      margin-left: 400px;
-    }
-  }
-
-  &--title {
-    max-width: 700px;
-    width: 100%;
-    transition: transform 1s;
-
-    @media (min-width: $tablet) {
-      width: 70%;
-    }
-  }
-
-  &--searched &--title {
-    transform: translate(-700px, 0);
-  }
-
-  &--hero {
-    background-color: rgba(0,0,0,0.87);
-    position: relative;
-    z-index: 2;
-    transition: background-color 3s;
-    pointer-events: none;
-  }
-
-  &--searched &--hero {
-    background-color: transparent;
-    transition: background-color 3s;
-  }
-
-  &--search {
-    &-container {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      left: 50%;
-      transform: translate(-50%, 0);
-      transition: transform 1s;
-
-      @media (min-width: $tablet) {
-        width: 400px;
-        bottom: 250px;
-        transform: translate(-50%, 0);
-      }
-    }
-
-    &-results {
-      display: none;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background-color: #fff;
-      height: calc(100vh - 100px);
-      width: 400px;
-      box-shadow: 0 0 10px -5px #000;
-      opacity: 0;
-      transition: opacity 0.3s linear 1s;
-
-      @media (min-width: $tablet) {
-        display: block;
-      }
-    }
-  }
-
-  &--searched &--search-results {
-    opacity: 1;
-  }
-
-  &--searched &--search-container {
-    @media (min-width: $tablet) {
-      transform: translate(calc(-50vw - 1px), 250px);
-    }
-  }
-}
+// @import "../../theme/index.scss";
+//
+// .mapboxgl-ctrl-geocoder {
+//   position: relative;
+//   width: 100%;
+//
+//   &--input {
+//     background: #000;
+//     color: #fff;
+//     outline: none;
+//     padding: 1em;
+//     font-size: 1rem;
+//     border: none;
+//     padding-left: 4rem;
+//     box-shadow: 0 0 10px #000;
+//     width: 100%;
+//     height: 70px;
+//
+//     @media (min-width: $tablet) {
+//       font-size: 1.5rem;
+//       height: 100px;
+//     }
+//   }
+//
+//   &--icon {
+//     position: absolute;
+//     top: 50%;
+//     transform: translate(0, -50%);
+//     left: 1em;
+//     fill: #fff;
+//     width: 2em;
+//     height: 2em;
+//   }
+//
+//   &--pin-right {
+//     display: none;
+//   }
+//
+//   .suggestions {
+//     padding: 1em 0;
+//
+//     &-wrapper {
+//       background: #fff;
+//       position: absolute;
+//       z-index: -1;
+//       width: 100%;
+//       bottom: 100%;
+//
+//       @media (min-width: $tablet) {
+//         bottom: initial;
+//       }
+//
+//       .map--searched & {
+//         bottom: 100%;
+//       }
+//     }
+//
+//     li {
+//       &:hover {
+//         background: #efefef;
+//       }
+//     }
+//
+//     a {
+//       display: block;
+//       cursor: pointer;
+//       color: #000;
+//       padding: 0.5em 1em;
+//     }
+//   }
+// }
+//
+// .map {
+//   &--item {
+//     width: 100%;
+//     height: 100vh;
+//     position: absolute;
+//   }
+//
+//   &--searched &--item {
+//     @media (min-width: $tablet) {
+//       width: calc(100% - 400px);
+//       margin-left: 400px;
+//     }
+//   }
+//
+//   &--title {
+//     max-width: 700px;
+//     width: 100%;
+//     transition: transform 1s;
+//
+//     @media (min-width: $tablet) {
+//       width: 70%;
+//     }
+//   }
+//
+//   &--searched &--title {
+//     transform: translate(-700px, 0);
+//   }
+//
+//   &--hero {
+//     background-color: rgba(0,0,0,0.87);
+//     position: relative;
+//     z-index: 2;
+//     transition: background-color 3s;
+//     pointer-events: none;
+//   }
+//
+//   &--searched &--hero {
+//     background-color: transparent;
+//     transition: background-color 3s;
+//   }
+//
+//   &--search {
+//     &-container {
+//       position: absolute;
+//       bottom: 0;
+//       width: 100%;
+//       left: 50%;
+//       transform: translate(-50%, 0);
+//       transition: transform 1s;
+//
+//       @media (min-width: $tablet) {
+//         width: 400px;
+//         bottom: 250px;
+//         transform: translate(-50%, 0);
+//       }
+//     }
+//
+//     &-results {
+//       display: none;
+//       position: absolute;
+//       top: 0;
+//       left: 0;
+//       background-color: #fff;
+//       height: calc(100vh - 100px);
+//       width: 400px;
+//       box-shadow: 0 0 10px -5px #000;
+//       opacity: 0;
+//       transition: opacity 0.3s linear 1s;
+//
+//       @media (min-width: $tablet) {
+//         display: block;
+//       }
+//     }
+//   }
+//
+//   &--searched &--search-results {
+//     opacity: 1;
+//   }
+//
+//   &--searched &--search-container {
+//     @media (min-width: $tablet) {
+//       transform: translate(calc(-50vw - 1px), 250px);
+//     }
+//   }
+// }
