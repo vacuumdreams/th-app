@@ -1,23 +1,12 @@
 import "mapbox-gl/dist/mapbox-gl.css"
 import React, { Component } from 'react'
+
+import MuiGeocoder from 'react-mui-mapbox-geocoder'
+import Typography from '@material-ui/core/Typography'
 // import MapGL from "react-map-gl"
 // import { GeoJsonLayer } from "deck.gl"
-// import Geocoder from "react-map-gl-geocoder"
-
-import Results from './component/results'
 
 const token = process.env.GATSBY_MAPBOX_ACCESS_TOKEN
-
-function GeocoderPlaceholder (props) {
-  return (
-    <div className="mapboxgl-ctrl-geocoder mapboxgl-ctrl">
-      <svg className="mapboxgl-ctrl-geocoder--icon mapboxgl-ctrl-geocoder--icon-search" viewBox="0 0 18 18" width="18" height="18">
-        <path d="M7.4 2.5c-2.7 0-4.9 2.2-4.9 4.9s2.2 4.9 4.9 4.9c1 0 1.8-.2 2.5-.8l3.7 3.7c.2.2.4.3.8.3.7 0 1.1-.4 1.1-1.1 0-.3-.1-.5-.3-.8L11.4 10c.4-.8.8-1.6.8-2.5.1-2.8-2.1-5-4.8-5zm0 1.6c1.8 0 3.2 1.4 3.2 3.2s-1.4 3.2-3.2 3.2-3.3-1.3-3.3-3.1 1.4-3.3 3.3-3.3z" />
-      </svg>
-      <input type="text" className="mapboxgl-ctrl-geocoder--input" placeholder={props.placeholder} />
-    </div>
-  )
-}
 
 class SearchableMap extends Component {
   state = {
@@ -29,7 +18,6 @@ class SearchableMap extends Component {
     },
     searchResultLayer: null,
     MapGL: null,
-    Geocoder: GeocoderPlaceholder,
     GeoJsonLayer: null,
     GeolocateControl: null,
   }
@@ -44,9 +32,6 @@ class SearchableMap extends Component {
         GeolocateControl: res.GeolocateControl,
       })
     })
-    import('react-map-gl-geocoder').then((res) => {
-      this.setState({ Geocoder: res.default })
-    })
     import('deck.gl').then((res) => {
       this.setState({ GeoJsonLayer: res.GeoJsonLayer })
     })
@@ -57,15 +42,6 @@ class SearchableMap extends Component {
       viewport: { ...this.state.viewport, ...viewport }
     })
   }
-  // if you are happy with Geocoder default settings, you can just use handleViewportChange directly
-  handleGeocoderViewportChange = (viewport) => {
-    const geocoderDefaultOverrides = { transitionDuration: 1000 };
-
-    return this.handleViewportChange({
-      ...viewport,
-      ...geocoderDefaultOverrides,
-    });
-  };
 
   handleOnResult = (event) => {
     const { GeoJsonLayer } = this.state
@@ -89,7 +65,6 @@ class SearchableMap extends Component {
         searched,
         viewport,
         MapGL,
-        Geocoder,
         GeolocateControl,
       } = this.state
 
@@ -110,34 +85,21 @@ class SearchableMap extends Component {
               )
             }
           </div>
-          <section className="map--hero hero is-fullheight">
+          <section className="">
             <div className="map--title">
-              <h1 className="title has-text-white has-text-weight-bold is-size-1-tablet is-size-2-mobile">
-                Life in plastic, it's <span className="is-family-secondary">NOT</span> fantastic.
-              </h1>
-            </div>
-            <div className="map--search-results">
-              <Results />
+              <Typography variant="h1">
+                Life in plastic,<br /> it's <span className="is-family-secondary">NOT</span> fantastic.
+              </Typography>
             </div>
             <div ref={this.containerRef} className="map--search-container">
               {
-                Geocoder && (
-                  <Geocoder
-                    mapRef={this.mapRef}
-                    onResult={this.handleOnResult}
-                    onViewportChange={this.handleGeocoderViewportChange}
-                    mapboxApiAccessToken={token}
-                    containerRef={this.containerRef}
-                    placeholder="Search for places"
-                    render={(props) => {
-                      return (`
-                        <div>
-                          ${props.text}
-                        </div>
-                      `)
-                    }}
-                  />
-                )
+                <MuiGeocoder
+                  accessToken={token}
+                  inputPlaceholder="Search for places"
+                  onSelect={() => console.log('select')}
+                  focusOnMount={true}
+                  showLoader={true}
+                />
               }
             </div>
             {
@@ -154,7 +116,6 @@ class SearchableMap extends Component {
               )
             }
           </section>
-          <div style={{ height: '150vh', background: '#000' }} />
         </div>
       )
     }

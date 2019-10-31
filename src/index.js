@@ -9,7 +9,6 @@ const services = {
 }
 
 export default function ThApp (props) {
-  console.log('THAPP', props)
   return (
     <App services={services}>
       {props.children}

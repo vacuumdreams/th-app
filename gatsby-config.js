@@ -48,9 +48,18 @@ module.exports = {
     },
     {
       resolve: 'gatsby-plugin-material-ui',
+      options: {},
+    },
+    {
+      resolve: 'gatsby-plugin-webfonts',
       options: {
-        stylesProvider: {
-          injectFirst: true,
+        fonts: {
+          google: [
+            {
+              family: 'Montserrat',
+              variants: ['300', '500', '800'],
+            },
+          ],
         },
       },
     },
