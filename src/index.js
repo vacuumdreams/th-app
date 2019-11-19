@@ -2,7 +2,7 @@ import React from 'react'
 
 import App from './app'
 
-import firebase from './service/firebase'
+import firebase from './services/firebase'
 
 const services = {
   firebase,

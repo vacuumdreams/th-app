@@ -1,3 +1,5 @@
+const { countries } = require('countries-list')
+
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`
 })
@@ -7,6 +9,13 @@ module.exports = {
     title: 'Trashhold',
     description: 'Life in plastic, it\'s not fantastic',
     author: '@trashhold',
+    countries: Object.keys(countries).reduce((acc, code) => ([
+      ...acc,
+      {
+        code,
+        ...countries[code],
+      },
+    ]), []).sort((a, b) => a.name < b.name),
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -28,7 +37,7 @@ module.exports = {
         background_color: '#000',
         theme_color: '#000',
         display: 'minimal-ui',
-        icon: 'src/static/images/gatsby-icon.png',
+        icon: 'src/static/images/trash.png',
       },
     },
     {
@@ -37,6 +46,32 @@ module.exports = {
         spaceId: process.env.CONTENTFUL_SPACE_ID,
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
         host: process.env.CONTENTFUL_HOST,
+      },
+    },
+    {
+      resolve: 'gatsby-source-firestore',
+      options: {
+        credential: require('./firebase.config.json'),
+        types: [
+          {
+            type: 'PlaceFeatures',
+            collection: 'place-features',
+          },
+          {
+            type: 'PlaceSocial',
+            collection: 'place-social',
+          },
+          {
+            type: 'PlaceTypes',
+            collection: 'place-types',
+            map: ({ name, description, features = [], social = [] }) => ({
+              name,
+              description,
+              features: features.map((ref) => ref.id),
+              social: social.map((ref) => ref.id),
+            }),
+          },
+        ],
       },
     },
     {

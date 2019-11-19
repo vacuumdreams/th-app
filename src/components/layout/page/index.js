@@ -16,10 +16,11 @@ const Layout = ({ children, title }) => {
     <div>
       <CssBaseline />
       <SEO title={title} />
-      <AppBar>
+      <AppBar position="sticky">
         <Toolbar>
-          <Link to="/sign-in">
-            <IconButton>
+          <div />
+          <Link to="/sign-in" style={{ color: 'inherit' }}>
+            <IconButton color="inherit">
               <Person />
             </IconButton>
           </Link>

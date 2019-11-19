@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Link as AppLink } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
-import { withFirebase } from 'react-redux-firebase'
 
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
@@ -33,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function SignUp ({ firebase }) {
+function SignUp ({ isLoaded, isEmpty, signup }) {
   const classes = useStyles()
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
@@ -51,11 +50,9 @@ function SignUp ({ firebase }) {
         </Typography>
         <form className={classes.form} noValidate onSubmit={(e) => {
           e.preventDefault()
-          firebase.createUser({
+          signup({
             email,
             password,
-          }, {
-            email,
             firstName,
             lastName,
           }).then((res) => {
@@ -121,7 +118,8 @@ function SignUp ({ firebase }) {
           <Button
             type="submit"
             fullWidth
-            variant="contained"
+            size="large"
+            variant="outlined"
             color="primary"
             disabled={!(email && password && firstName && lastName)}
             className={classes.submit}
@@ -141,4 +139,4 @@ function SignUp ({ firebase }) {
   )
 }
 
-export default withFirebase(SignUp)
+export default SignUp

@@ -16,7 +16,7 @@ import Container from '@material-ui/core/Container'
 
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     margin: theme.spacing(8, 0, 4),
     display: 'flex',
@@ -36,12 +36,10 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-function SignIn ({ auth, profile, firebase }) {
+function SignIn ({ isLoaded, isEmpty, signin }) {
   const classes = useStyles()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
-  console.log(auth, profile)
 
   return (
     <Container component="main" maxWidth="xs">
@@ -55,7 +53,7 @@ function SignIn ({ auth, profile, firebase }) {
         </Typography>
         <form className={classes.form} noValidate onSubmit={(e) => {
           e.preventDefault()
-          firebase.login({ email, password }).then((res) => {
+          signin({ email, password }).then((res) => {
             console.log(res)
           })
         }}>
@@ -92,7 +90,8 @@ function SignIn ({ auth, profile, firebase }) {
           <Button
             type="submit"
             fullWidth
-            variant="contained"
+            size="large"
+            variant="outlined"
             color="primary"
             disabled={!(email && password)}
             className={classes.submit}

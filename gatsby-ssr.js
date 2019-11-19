@@ -1,8 +1,11 @@
 // import React from 'react'
+//
 // import ThApp from './src'
 //
-// export const wrapPageElement = ({ element }) => (
-//   <ThApp>
-//     {element}
-//   </ThApp>
-// )
+// export const wrapRootElement = (props) => {
+//   return (
+//     <ThApp>
+//       {props.element}
+//     </ThApp>
+//   )
+// }

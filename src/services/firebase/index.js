@@ -1,5 +1,7 @@
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import 'firebase/database'
+import 'firebase/firestore'
 
 const config = {
   apiKey: process.env.GATSBY_FIREBASE_API_KEY,
@@ -16,3 +18,5 @@ firebase.initializeApp(config)
 
 export default firebase
 export const auth = firebase.auth()
+export const database = firebase.database()
+export const firestore = firebase.firestore()
