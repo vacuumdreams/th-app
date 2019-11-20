@@ -1,44 +1,50 @@
+import React from 'react'
 import { compose, path } from 'ramda'
 import { connect } from 'react-redux'
-import { withFirebase } from 'react-redux-firebase'
-import { withHandlers } from 'recompose'
+
+import { useSelector } from 'react-redux'
+import { useFirebase } from 'react-redux-firebase'
 
 import Signin from './components/sign-in'
 import Signup from './components/sign-up'
 
-const selector = ({ firebase }) => ({
-  isLoaded: path(['auth'], firebase),
-  isEmpty: path(['auth'], firebase),
-  error: path(['authError'], firebase),
-})
+export function AuthSignin () {
+  const firebase = useFirebase()
+  const auth = useSelector(({ firebase }) => ({
+    isLoaded: path(['auth'], firebase),
+    isEmpty: path(['auth'], firebase),
+    error: path(['authError', 'message'], firebase),
+  }))
 
-const signinWrapper = compose(
-  withFirebase,
-  withHandlers({
-    signin: ({ firebase }) => firebase.login,
-  }),
-)
+  return (
+    <Signin {...auth} signin={firebase.login} />
+  )
+}
 
-export const AuthSignin = connect(selector)(signinWrapper(Signin))
+export function AuthSignup () {
+  const firebase = useFirebase()
+  const auth = useSelector(({ firebase }) => ({
+    isLoaded: path(['auth'], firebase),
+    isEmpty: path(['auth'], firebase),
+    error: path(['authError', 'message'], firebase),
+  }))
 
-const signupWrapper = compose(
-  withFirebase,
-  withHandlers({
-    signup: ({ firebase }) => ({
-      email,
-      password,
+  const signup = ({
+    email,
+    password,
+    firstName,
+    lastName,
+  }) => firebase.createUser({
+    email,
+    password,
+    displayName: `${firstName} ${lastName}`,
+    metadata: {
       firstName,
       lastName,
-    }) => firebase.createUser({
-      email,
-      password,
-      displayName: `${firstName} ${lastName}`,
-      metadata: {
-        firstName,
-        lastName,
-      },
-    })
-  }),
-)
+    },
+  })
 
-export const AuthSignup = connect(selector)(signupWrapper(Signup))
+  return (
+    <Signup {...auth} signup={signup} />
+  )
+}

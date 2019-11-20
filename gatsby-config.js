@@ -94,6 +94,10 @@ module.exports = {
               family: 'Montserrat',
               variants: ['300', '500', '800'],
             },
+            {
+              family: 'Gloria Hallelujah',
+              variants: ['400'],
+            },
           ],
         },
       },

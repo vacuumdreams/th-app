@@ -52,10 +52,8 @@ export default function PlaceDetails ({
   const {
     register,
     handleSubmit,
-    formState,
     errors,
   } = useForm({
-    mode: 'onBlur',
     validationSchema,
   })
 

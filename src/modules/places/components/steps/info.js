@@ -36,7 +36,7 @@ const normalizeSubmitData = (typeList, cb) => (data = {}) => {
   const placeTypes = pathOr([], ['types'], data)
     .filter((type) => type !== 'false')
   const placeFeatures = pathOr([], ['features'], data)
-  // all available features based on selected types / 
+  // all available features based on selected types /
   const typeFeatures = placeFeatures.length > 0 ? getTypeFeatures(placeTypes)(typeList) : []
 
   return cb({
@@ -62,7 +62,6 @@ export default function PlaceInfo ({
     formState,
     errors,
   } = useForm({
-    mode: 'onBlur',
     validationSchema,
   })
 

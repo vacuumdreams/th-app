@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link as AppLink } from 'gatsby'
+import { path } from 'ramda'
 import { makeStyles } from '@material-ui/core/styles'
-import { withFirebase } from 'react-redux-firebase'
+import useForm from 'react-hook-form'
+
+import Recaptcha from 'react-recaptcha'
 
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
@@ -15,6 +18,10 @@ import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+
+import Notification from '../../../../components/atom/notification'
+
+import yup from '../../../../services/validation'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -36,14 +43,52 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function SignIn ({ isLoaded, isEmpty, signin }) {
+const validationSchema = yup.object().shape({
+  email: yup.string().required('Please fill in your email address'),
+  password: yup.string().required('Please fill in your password'),
+})
+
+const RECAPTCHA_KEY = process.env.GATSBY_RECAPTCHA_SITEKEY
+
+export default function SignIn ({
+  isLoaded,
+  isEmpty,
+  error = null,
+  signin,
+}) {
   const classes = useStyles()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [submitError, setError] = useState(error)
+  const [isLoading, setLoading] = useState(false)
+
+  useEffect(() => {
+    if (error) {
+      setError(error)
+    }
+  }, [error])
+
+  const {
+    register,
+    handleSubmit,
+    errors,
+  } = useForm({
+    validationSchema,
+  })
+
+  const errorMessages = {
+    email: path(['email', 'message'], errors),
+    password: path(['password', 'message'], errors),
+  }
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
+      <Recaptcha sitekey={RECAPTCHA_KEY} />
+      {
+        submitError && (
+          <Notification type="error" onClose={() => setError(null)}>
+            {submitError}
+          </Notification>
+        )
+      }
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -51,12 +96,10 @@ function SignIn ({ isLoaded, isEmpty, signin }) {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate onSubmit={(e) => {
-          e.preventDefault()
-          signin({ email, password }).then((res) => {
-            console.log(res)
-          })
-        }}>
+        <form
+          className={classes.form}
+          onSubmit={handleSubmit(signin)}
+          noValidate>
           <TextField
             variant="outlined"
             margin="normal"
@@ -66,8 +109,12 @@ function SignIn ({ isLoaded, isEmpty, signin }) {
             placeholder="Email Address"
             name="email"
             autoComplete="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            inputProps={{
+              ref: register,
+              readOnly: isLoading,
+            }}
+            error={!!errorMessages.email}
+            helperText={errorMessages.email}
             autoFocus
           />
           <TextField
@@ -80,8 +127,12 @@ function SignIn ({ isLoaded, isEmpty, signin }) {
             type="password"
             id="password"
             autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            inputProps={{
+              ref: register,
+              readOnly: isLoading,
+            }}
+            error={!!errorMessages.password}
+            helperText={errorMessages.password}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -93,7 +144,7 @@ function SignIn ({ isLoaded, isEmpty, signin }) {
             size="large"
             variant="outlined"
             color="primary"
-            disabled={!(email && password)}
+            disabled={!!(errorMessages.email || errorMessages.password || !isLoading)}
             className={classes.submit}
           >
             Sign In
@@ -115,5 +166,3 @@ function SignIn ({ isLoaded, isEmpty, signin }) {
     </Container>
   )
 }
-
-export default withFirebase(SignIn)

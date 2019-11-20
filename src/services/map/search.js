@@ -5,6 +5,7 @@ const path = 'geocoding/v5/mapbox.places'
 
 const toQueryString = (params = {}) =>
   Object.keys(params)
+    .filter((key) => params[key] !== undefined)
     .map((key) => `${key}=${encodeURIComponent(params[key])}`)
     .join('&')
 

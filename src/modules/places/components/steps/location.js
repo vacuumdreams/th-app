@@ -68,7 +68,6 @@ export default function PlaceLocation ({
     formState,
     errors,
   } = useForm({
-    mode: 'onBlur',
     validationSchema,
     defaultValues: {
       country: pathOr({}, ['country'], place),
