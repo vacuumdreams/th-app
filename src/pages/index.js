@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { pathOr } from 'ramda'
+import { path, pathOr } from 'ramda'
 
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
@@ -14,9 +14,13 @@ const token = process.env.GATSBY_MAPBOX_ACCESS_TOKEN
 
 export default function IndexPage ({
   navigate,
+  location,
 }) {
   return (
-    <Layout title="Trashhold" navTheme="home">
+    <Layout
+      title="Trashhold"
+      navTheme="home"
+    >
       <div className="map" style={{ marginTop: '-64px' }}>
         <Container style={{ paddingTop: '124px' }}>
           <Grid

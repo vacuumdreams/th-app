@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { pathOr } from 'ramda'
+import { path, pathOr } from 'ramda'
 
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'

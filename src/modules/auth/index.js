@@ -1,12 +1,15 @@
 import React from 'react'
 import { compose, path } from 'ramda'
 import { connect } from 'react-redux'
+import { navigate } from 'gatsby'
 
 import { useSelector } from 'react-redux'
 import { useFirebase } from 'react-redux-firebase'
 
 import Signin from './components/sign-in'
 import Signup from './components/sign-up'
+import SignedGuard from './components/guard/signed'
+import Welcome from './components/guard/welcome'
 
 export function AuthSignin () {
   const firebase = useFirebase()
@@ -17,7 +20,19 @@ export function AuthSignin () {
   }))
 
   return (
-    <Signin {...auth} signin={firebase.login} />
+    <Signin {...auth} onSignin={(data) => {
+      if (!data.remember) {
+        return firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+          .then(() => firebase.login(data))
+          .then(() => {
+            navigate('/')
+          })
+      }
+      return firebase.login(data)
+        .then(() => {
+          navigate('/')
+        })
+    }} />
   )
 }
 
@@ -45,6 +60,19 @@ export function AuthSignup () {
   })
 
   return (
-    <Signup {...auth} signup={signup} />
+    <Signup {...auth} onSignup={signup} />
+  )
+}
+
+export function AuthGuard () {
+  const firebase = useFirebase()
+  return (
+    <SignedGuard onLogout={() => firebase.logout()} />
+  )
+}
+
+export function AuthWelcome () {
+  return (
+    <Welcome onContinue={() => navigate('/')} />
   )
 }

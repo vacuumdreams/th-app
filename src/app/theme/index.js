@@ -1,4 +1,4 @@
-import { createMuiTheme } from '@material-ui/core/styles'
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles'
 import { amber, green, grey, red } from '@material-ui/core/colors'
 
 const augmentColorMap = (color) => ({
@@ -17,7 +17,7 @@ const montserrat = {
   `,
 }
 
-const theme = {
+const base = {
   background: '#181818',
   shape: {
     borderRadius: 0,
@@ -48,6 +48,12 @@ const theme = {
     fontStyle: 'normal',
     fontWeight: '400',
   },
+}
+
+const baseTheme = createMuiTheme(base)
+
+const theme = {
+  ...baseTheme,
   overrides: {
     MuiCssBaseline: {
       '@global': {
@@ -62,6 +68,13 @@ const theme = {
     MuiButton: {
       root: {
         textTransform: 'none',
+      },
+      contained: {
+        boxShadow: 'none',
+      },
+      containedSizeLarge: {
+        height: 'calc(3.5em + 2px)',
+        fontSize: '1rem',
       },
       outlinedSizeLarge: {
         height: '3.5em',
@@ -85,5 +98,5 @@ const theme = {
     },
   },
 }
-console.log(createMuiTheme(theme))
-export default createMuiTheme(theme)
+
+export default responsiveFontSizes(theme)
