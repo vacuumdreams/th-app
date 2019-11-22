@@ -97,10 +97,10 @@ export default function SearchPage ({
         </div>
       )}
     >
-      <Grid container>
+      <Grid container style={{ position: 'relative' }}>
         <Grid item xs={12} sm={5} md={4}>
           <Paper style={{
-            height: 'calc(100vh - 64px)',
+            minHeight: 'calc(100vh - 64px)',
           }}>
             <Toolbar>
               <div style={{ margin: '-0.25rem' }}>
@@ -186,7 +186,7 @@ export default function SearchPage ({
           </Paper>
         </Grid>
         <Grid item xs={12} sm={7} md={8}>
-          <div style={{ position: 'sticky', top: '0' }}>
+          <div style={{ position: 'fixed', top: '64px', right: '0', width: '100%' }}>
             <div style={{
               width: '100%',
               height: 'calc(100vh - 64px)',
