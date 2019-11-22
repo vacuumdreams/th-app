@@ -77,8 +77,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-segment-js',
       options: {
-          prodKey: process.env.SEGMENT_WRITE_KEY,
-          trackPage: false
+        prodKey: process.env.SEGMENT_WRITE_KEY,
+        trackPage: false,
       }
     },
     {
@@ -86,22 +86,15 @@ module.exports = {
       options: {},
     },
     {
-      resolve: 'gatsby-plugin-webfonts',
+      resolve: 'gatsby-plugin-google-fonts',
       options: {
-        fonts: {
-          google: [
-            {
-              family: 'Montserrat',
-              variants: ['300', '500', '800'],
-            },
-            {
-              family: 'Gloria Hallelujah',
-              variants: ['400'],
-            },
-          ],
-        },
-      },
-    },
+        fonts: [
+          'material icons',
+          'montserrat:300,500,800',
+          'gloria hallelujah:400',
+        ]
+      }
+    }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // 'gatsby-plugin-offline',

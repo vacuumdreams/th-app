@@ -24,7 +24,7 @@ function PlacePage ({ data }) {
 export default PlacePage
 
 export const pageQuery = graphql`
-  query PlaceQuery {
+  query PlacePageQuery {
     allPlaceFeatures {
       edges {
         node {
