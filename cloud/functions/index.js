@@ -1,15 +1,28 @@
-import { functions } from 'firebase-functions'
-import { admin } from 'firebase-admin'
+const functions = require('firebase-functions')
+const admin = require('firebase-admin')
 
-// admin.initializeApp()
+const doIndexing = require('./search-indexing')
+const initProfile = require('./user-profile')
 
-// exports.createProfile = functions.auth
-//   .user()
-//   .onCreate((record, context) => {
-//     return admin
-//       .database()
-//       .ref(`/profile/${record.data.uid}`)
-//       .set({
-//         email: record.data.email
-//       })
-//   })
+require('dotenv').config({
+  path: `../../.env.${process.env.NODE_ENV}`
+})
+
+admin.initializeApp()
+const db = admin.firestore()
+const createProfile = initProfile(db)
+
+const collection = {
+  db: 'place',
+  index: 'th.places',
+  facets: ['types', 'features'],
+}
+
+module.exports.syncIndexes = () => doIndexing({
+  appid: process.env.ALGOLIA_APP_ID,
+  apiKey: process.env.ALGOLIA_SEARCH_TOKEN,
+  collection,
+})
+
+module.exports.authOnCreate = functions.auth.user()
+  .onCreate(createProfile)
