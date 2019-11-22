@@ -49,32 +49,6 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-source-firestore',
-      options: {
-        credential: require('./firebase.config.json'),
-        types: [
-          {
-            type: 'PlaceFeatures',
-            collection: 'place-features',
-          },
-          {
-            type: 'PlaceSocial',
-            collection: 'place-social',
-          },
-          {
-            type: 'PlaceTypes',
-            collection: 'place-types',
-            map: ({ name, description, features = [], social = [] }) => ({
-              name,
-              description,
-              features: features.map((ref) => ref.id),
-              social: social.map((ref) => ref.id),
-            }),
-          },
-        ],
-      },
-    },
-    {
       resolve: 'gatsby-plugin-segment-js',
       options: {
         prodKey: process.env.SEGMENT_WRITE_KEY,

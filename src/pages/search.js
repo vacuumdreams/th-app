@@ -97,7 +97,7 @@ export default function SearchPage ({
         </div>
       )}
     >
-      <Grid container style={{ position: 'relative' }}>
+      <Grid container>
         <Grid item xs={12} sm={5} md={4}>
           <Paper style={{
             minHeight: 'calc(100vh - 64px)',
@@ -117,6 +117,7 @@ export default function SearchPage ({
                   color="secondary"
                   variant="outlined"
                   label="Features"
+                  disabled={true}
                   style={{ margin: '0.25rem' }}
                   onClick={() => setFiltersMenuOpen(true)}
                 />
@@ -144,7 +145,7 @@ export default function SearchPage ({
               </Menu>
             </Toolbar>
             <Divider />
-            <Container style={{ paddingTop: '1rem' }}>
+            <Container style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>
               <Typography variant="h5">2 results</Typography>
               <Card style={{ boxShadow: 'none', border: '1px solid grey', margin: '2rem 0' }}>
                 <CardActionArea>
@@ -185,17 +186,15 @@ export default function SearchPage ({
             </Container>
           </Paper>
         </Grid>
-        <Grid item xs={12} sm={7} md={8}>
-          <div style={{ position: 'fixed', top: '64px', right: '0', width: '100%' }}>
-            <div style={{
-              width: '100%',
-              height: 'calc(100vh - 64px)',
-            }}>
-              <Map
-                token={token}
-                {...viewport}
-              />
-            </div>
+        <Grid item xs={12} sm={7} md={8} style={{ position: 'fixed', top: '64px', right: '0', width: '100%' }}>
+          <div style={{
+            width: '100%',
+            height: 'calc(100vh - 64px)',
+          }}>
+            <Map
+              token={token}
+              {...viewport}
+            />
           </div>
         </Grid>
       </Grid>

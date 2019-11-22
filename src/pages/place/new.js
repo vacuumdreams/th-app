@@ -1,57 +1,39 @@
 import React from 'react'
-import { graphql } from 'gatsby'
 import { pathOr } from 'ramda'
+import { useSelector } from 'react-redux'
+import { useFirestoreConnect } from 'react-redux-firebase'
 
 import Layout from '../../components/layout/page'
 import { PlaceItem } from '../../modules/places'
 
-function PlacePage ({ data }) {
-  const placeFeatures = pathOr([], ['allPlaceFeatures', 'edges'], data).map(({ node }) => node)
-  const placeSocial = pathOr([], ['allPlaceSocial', 'edges'], data).map(({ node }) => node)
-  const placeTypes = pathOr([], ['allPlaceTypes', 'edges'], data).map(({ node }) => node)
+const toArray = (obj) => Object.keys(obj).map((key) => ({ id: key, ...obj[key] }))
+
+function PlacePage () {
+  useFirestoreConnect([
+    { collection: 'place-types' },
+    { collection: 'place-features' },
+    { collection: 'place-social' },
+  ])
+
+  const {
+    placeTypes,
+    placeFeatures,
+    placeSocial,
+  } = useSelector(({ firestore }) => ({
+    placeTypes: pathOr({}, ['data', 'place-types'], firestore),
+    placeFeatures: pathOr({}, ['data', 'place-features'], firestore),
+    placeSocial: pathOr({}, ['data', 'place-social'], firestore),
+  }))
 
   return (
     <Layout title="Trashhold - Add new place">
       <PlaceItem
-        features={placeFeatures}
-        social={placeSocial}
-        types={placeTypes}
+        features={toArray(placeFeatures)}
+        social={toArray(placeSocial)}
+        types={toArray(placeTypes)}
       />
     </Layout>
   )
 }
 
 export default PlacePage
-
-export const pageQuery = graphql`
-  query PlacePageQuery {
-    allPlaceFeatures {
-      edges {
-        node {
-          id
-          name
-          description
-        }
-      }
-    }
-    allPlaceSocial {
-      edges {
-        node {
-          id
-          name
-          icon
-        }
-      }
-    }
-    allPlaceTypes {
-      edges {
-        node {
-          id
-          name
-          features
-          social
-        }
-      }
-    }
-  }
-`
