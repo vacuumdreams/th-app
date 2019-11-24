@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import throttle from 'lodash/throttle'
+import { makeStyles } from '@material-ui/core/styles'
 import {
   path,
   pathOr,
@@ -23,12 +24,37 @@ const onSearch = ({ token, query }) => searchLocation({
   autocomplete: false,
 })
 
+const useStyles = makeStyles((theme) => ({
+  autocompleteLight: {
+    backgroundColor: theme.palette.common.white,
+    color: theme.palette.common.black,
+  },
+  autocompleteDark: {
+    backgroundColor: 'rgba(0,0,0,0)',
+    color: theme.palette.common.white,
+  },
+  inputWrap: {
+    color: 'inherit',
+  },
+  inputWrapThin: {
+    height: '38px',
+  },
+}))
+
+const autocompleteClassMap = {
+  dark: 'autocompleteDark',
+  light: 'autocompleteLight',
+}
+
 export default function MapSearch ({
   token,
   defaultValue = '',
   autoFocus,
+  theme = 'dark',
+  thin = false,
   onSelect = () => {},
 }) {
+  const classes = useStyles()
   const [query, setQuery] = useState('')
   const [error, setError] = useState('')
   const [options, setOptions] = useState([])
@@ -63,8 +89,10 @@ export default function MapSearch ({
     <Autocomplete
       options={options}
       getOptionLabel={pathOr('', ['place_name'])}
+      className={classes[autocompleteClassMap[theme]]}
       inputValue={query}
       freeSolo
+      debug
       includeInputInList
       disableOpenOnFocus
       onChange={(event, value) => {
@@ -109,6 +137,7 @@ export default function MapSearch ({
           name="country"
           InputProps={{
             ...params.InputProps,
+            className: thin ? classes.inputWrapThin : '',
             startAdornment: (
               <InputAdornment position="start">
                 <Search color="inherit" />

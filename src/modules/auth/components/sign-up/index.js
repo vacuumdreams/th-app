@@ -179,7 +179,7 @@ export default function SignUp ({
               type="submit"
               fullWidth
               size="large"
-              variant="outlined"
+              variant="contained"
               color="primary"
               disabled={!isEmpty(errors) || isLoading}
               className={classes.submit}

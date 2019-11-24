@@ -166,7 +166,7 @@ export default function PlaceInfo ({
             size="large"
             variant="outlined"
             color="primary"
-            disabled={!isNext || (formState.touched.length === 0 ? false : !formState.isValid)}
+            disabled={false}
             onClick={handleSubmit(normalizeSubmitData(typeList, onNext))}
           >
             Next

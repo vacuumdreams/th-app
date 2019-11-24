@@ -29,7 +29,7 @@ export default function IndexPage ({
             alignItems="center"
           >
             <Grid item>
-              <Typography variant="h1" style={{ opacity: '0.2', marginTop: '2rem' }}>
+              <Typography variant="h1" style={{ opacity: '0.4', marginTop: '2rem' }}>
                 life in plastic,<br /> it's <span style={{ fontFamily: 'Gloria Hallelujah' }}>NOT</span> fantastic.
               </Typography>
               <div style={{ height: '2rem' }} />

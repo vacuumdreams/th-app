@@ -78,9 +78,10 @@ export default function SearchPage ({
     <Layout
       title="Trashhold"
       navChild={(
-        <div style={{ minWidth: '300px', width: '40vw', marginLeft: '1rem' }}>
+        <div style={{ minWidth: '300px', width: '40vw', height: '36px', marginLeft: '1rem' }}>
           <MapSearch
             token={token}
+            thin={true}
             defaultValue={defaultValue}
             onSelect={(value) => {
               const [newLongitude, newLatitude] = pathOr([0, 0], ['center'], value)
@@ -103,6 +104,7 @@ export default function SearchPage ({
             minHeight: 'calc(100vh - 64px)',
           }}>
             <Toolbar>
+              <Typography>2 results</Typography>
               <div style={{ margin: '-0.25rem' }}>
                 <Chip
                   ref={filterRef}
@@ -146,17 +148,17 @@ export default function SearchPage ({
             </Toolbar>
             <Divider />
             <Container style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>
-              <Typography variant="h5">2 results</Typography>
               <Card style={{ boxShadow: 'none', border: '1px solid grey', margin: '2rem 0' }}>
                 <CardActionArea>
                   <CardMedia>
                     <Box style={{ backgroundColor: '#828282', width: '100%', paddingBottom: '45%' }} />
                   </CardMedia>
                   <CardContent>
-                    <Typography>The hipsters go here</Typography>
+                    <Typography variant="h6">The hipsters go here</Typography>
+                    <Typography variant="caption">Vegan - Delivery - Local</Typography>
                   </CardContent>
                   <CardActions>
-                    <Icon>storefront</Icon>
+                    <Icon>restaurant</Icon>
                     <Icon>local_cafe</Icon>
                     <Icon style={{ marginLeft: 'auto' }}>star</Icon>
                     <Typography component="span">3.9</Typography>
@@ -172,7 +174,7 @@ export default function SearchPage ({
                     <Box style={{ backgroundColor: '#828282', width: '100%', paddingBottom: '45%' }} />
                   </CardMedia>
                   <CardContent>
-                    <Typography>Fancy shit</Typography>
+                    <Typography variant="h6">Fancy shit</Typography>
                   </CardContent>
                   <CardActions>
                     <Icon>local_cafe</Icon>

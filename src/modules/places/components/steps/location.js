@@ -229,7 +229,7 @@ export default function PlaceLocation ({
             size="large"
             variant="outlined"
             color="primary"
-            disabled={!isNext || (formState.touched.length === 0 ? false : !formState.isValid)}
+            disabled={false}
             onClick={handleSubmit(onSubmit(onNext, setSubmitError))}
           >
             Next

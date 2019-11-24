@@ -18,17 +18,17 @@ const montserrat = {
 }
 
 const base = {
-  background: '#181818',
   shape: {
     borderRadius: 0,
   },
   palette: {
     type: 'dark',
+    contrastThreshold: 4,
     primary: {
       main: '#28AD83',
     },
     secondary: {
-      main: '#C79F63',
+      main: '#C7C190',
     },
     error: {
       main: '#E85D5A',
@@ -42,6 +42,11 @@ const base = {
     info: {
       main: '#C79F63',
     },
+    hover: {
+      dark: '#668266',
+      main: '#BDDCBD',
+      light: '#E4FEE0',
+    }
   },
   typography: {
     fontFamily: 'Montserrat, sans-serif',
@@ -54,6 +59,16 @@ const baseTheme = createMuiTheme(base)
 
 const theme = {
   ...baseTheme,
+  palette: {
+    ...baseTheme.palette,
+    background: {
+      default: '#111',
+    },
+    common: {
+      black: '#111',
+      white: '#f5f5f5',
+    },
+  },
   overrides: {
     MuiCssBaseline: {
       '@global': {
@@ -71,6 +86,15 @@ const theme = {
       },
       contained: {
         boxShadow: 'none',
+        paddingTop: '7px',
+        paddingBottom: '7px',
+        backgroundColor: '#f5f5f5',
+        '&:hover': {
+          boxShadow: 'none',
+        },
+      },
+      outlined: {
+        borderWidth: '2px!important',
       },
       containedSizeLarge: {
         height: 'calc(3.5em + 2px)',
@@ -79,6 +103,11 @@ const theme = {
       outlinedSizeLarge: {
         height: '3.5em',
         fontSize: '1rem',
+      },
+    },
+    MuiOutlinedInput: {
+      notchedOutline: {
+        borderWidth: '2px',
       },
     },
     MuiStepper: {
@@ -95,8 +124,25 @@ const theme = {
       inputRoot: {
         flexWrap: 'nowrap',
       },
+      paper: {
+        margin: '0',
+      },
+      listbox: {
+        padding: '0',
+        margin: '0 0 0 2px',
+      },
+      option: {
+        backgroundColor: baseTheme.palette.grey.A400,
+        '&:hover, &[data-focus="true"]': {
+          backgroundColor: baseTheme.palette.hover.dark,
+        },
+      },
     },
   },
+}
+
+if (typeof window !== 'undefined') {
+  console.log(responsiveFontSizes(theme))
 }
 
 export default responsiveFontSizes(theme)

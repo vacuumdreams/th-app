@@ -1,4 +1,5 @@
 import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
 
 import { Link } from 'gatsby'
 
@@ -13,7 +14,19 @@ import RestoreFromTrash from '@material-ui/icons/RestoreFromTrash'
 
 import logo from '../../../static/images/trash.png'
 
+const useStyles = makeStyles((theme) => ({
+  logo: {
+    border: '2px solid',
+    padding: '0.5rem',
+  },
+  logoInner: {
+    transform: 'scale(0.75)',
+  },
+}))
+
 export default function Navbar ({ auth = {}, theme = 'page', navChild }) {
+  const classes = useStyles()
+
   return (
     <AppBar
       position="sticky"
@@ -28,12 +41,13 @@ export default function Navbar ({ auth = {}, theme = 'page', navChild }) {
           <Grid item>
             <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
               <Grid container alignItems="center">
-                <Grid item>
+                <Grid item width="3rem">
                   <IconButton
                     color={theme === 'home' ? 'secondary' : 'default'}
-                    style={{ border: `1px solid ${theme === 'home' ? '#C79F63' : '#fff'}`, transform: 'scale(0.75)' }}
+                    className={classes.logo}
+                    style={{ borderColor: theme === 'home' ? '#C79F63' : '#fff' }}
                   >
-                    <RestoreFromTrash />
+                    <RestoreFromTrash className={classes.logoInner}  />
                   </IconButton>
                 </Grid>
                 {
