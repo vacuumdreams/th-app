@@ -28,16 +28,18 @@ module.exports = {
         icon: 'src/images/gatsby-icon.png',
       },
     },
+    {
+      resolve: 'gatsby-plugin-google-fonts',
+      options: {
+        fonts: [
+          'material icons',
+          'montserrat:300',
+          'gloria hallelujah:400',
+        ]
+      }
+    }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // 'gatsby-plugin-offline',
-    {
-      resolve: 'gatsby-source-sanity',
-      options: {
-        projectId: 'ocnnw83z',
-        dataset: 'production',
-        token: process.env.SANITY_PRIVATE_TOKEN,
-      },
-    }
   ],
 }
