@@ -1,10 +1,33 @@
 import React from 'react'
+import { path, pathOr } from 'ramda'
+import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
-// import { useStaticQuery, graphql } from 'gatsby'
+import CssBaseline from '@material-ui/core/CssBaseline'
 
-const Layout = ({ children }) => {
+import SEO from './seo'
+import Navbar from '../navbar'
+
+const Layout = ({
+  children,
+  title,
+  navTheme,
+  navChild,
+}) => {
+  const auth = useSelector(({ firebase }) => ({
+    isLoaded: pathOr(false, ['auth', 'isLoaded'], firebase),
+    isEmpty: pathOr(true, ['auth', 'isEmpty'], firebase),
+    error: pathOr('', ['authError', 'message'], firebase),
+  }))
+
   return (
-    <div style={{ width: '100%', height: '100%', backgroundColor: '#000' }}>
+    <div>
+      <CssBaseline />
+      <SEO title={title} />
+      <Navbar
+        auth={auth}
+        theme={navTheme}
+        navChild={navChild}
+      />
       {children}
     </div>
   )

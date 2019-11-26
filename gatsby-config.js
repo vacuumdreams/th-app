@@ -1,3 +1,5 @@
+const { countries } = require('countries-list')
+
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`
 })
@@ -7,19 +9,25 @@ module.exports = {
     title: 'Trashhold',
     description: 'Life in plastic, it\'s not fantastic',
     author: '@trashhold',
+    countries: Object.keys(countries).reduce((acc, code) => ([
+      ...acc,
+      {
+        code,
+        ...countries[code],
+      },
+    ]), []).sort((a, b) => a.name < b.name),
   },
   plugins: [
     'gatsby-plugin-react-helmet',
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
-        path: `${__dirname}/src/images`,
+        path: `${__dirname}/src/static/images`,
       },
     },
-    'gatsby-transformer-sharp',
-    'gatsby-plugin-sharp',
-    'gatsby-plugin-sass',
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
@@ -29,7 +37,7 @@ module.exports = {
         background_color: '#000',
         theme_color: '#000',
         display: 'minimal-ui',
-        icon: 'src/images/gatsby-icon.png',
+        icon: 'src/static/images/trash.png',
       },
     },
     {
@@ -43,17 +51,24 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-segment-js',
       options: {
-          // your segment write key for your production environment
-          // when process.env.NODE_ENV === 'production'
-          // required; non-empty string
-          prodKey: process.env.SEGMENT_WRITE_KEY,
-
-          // boolean (defaults to false) on whether you want
-          // to include analytics.page() automatically
-          // if false, see below on how to track pageviews manually
-          trackPage: false
+        prodKey: process.env.SEGMENT_WRITE_KEY,
+        trackPage: false,
       }
     },
+    {
+      resolve: 'gatsby-plugin-material-ui',
+      options: {},
+    },
+    {
+      resolve: 'gatsby-plugin-google-fonts',
+      options: {
+        fonts: [
+          'material icons',
+          'montserrat:300,500,800',
+          'gloria hallelujah:400',
+        ]
+      }
+    }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // 'gatsby-plugin-offline',
