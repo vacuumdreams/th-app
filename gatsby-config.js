@@ -25,7 +25,7 @@ module.exports = {
         background_color: '#000',
         theme_color: '#000',
         display: 'minimal-ui',
-        icon: 'src/images/trashhold.png',
+        icon: 'src/static/images/trashhold.png',
       },
     },
     {
