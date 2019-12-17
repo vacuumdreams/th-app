@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: 'Trashhold',
-    description: 'Plastic is not fantastic',
+    description: 'Life in plastic, it\'s not fantastic',
     author: '@trashhold',
   },
   plugins: [
@@ -25,7 +25,7 @@ module.exports = {
         background_color: '#000',
         theme_color: '#000',
         display: 'minimal-ui',
-        icon: 'src/images/gatsby-icon.png',
+        icon: 'src/images/trashhold.png',
       },
     },
     {
